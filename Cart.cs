@@ -12,7 +12,7 @@ namespace PizzaOrderTaking
 
         }
 
-        public static Cart Instance => new Cart();
+        public static Cart Instance => instance = instance ??new Cart();
 
         public delegate void CartUpdatedHandler(IFoodItem item, float total);
         
@@ -42,10 +42,14 @@ namespace PizzaOrderTaking
 
         public void DisplayCartItems()
         {
+            Console.WriteLine("\n\n \t\t\t ****** CART ITEMS ****** \n");
+
             foreach (var item in Items)
             {
                 Console.WriteLine($"{item.Name} - {item.Price.ToString("00.00")}");
             }
+
+            Console.WriteLine($"\n Total: {Items.Sum(i => i.Price)}");
         }
     }
 }
